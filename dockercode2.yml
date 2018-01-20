@@ -1,0 +1,19 @@
+---
+- hosts: all
+  tasks:  
+    - name: Login to docker
+      docker_login:
+        username: badhulla
+        password: Aaquib@2015
+        email: badhulla.b@gmail.com
+
+    - name: Launch docker container
+      docker_container:
+        name: bottlecontainer
+        image: badhulla/ansibleimage:latest
+        ports:
+          - "4040:8080"
+
+  handlers:
+    - name: start docker
+      service: name=docker state=started
